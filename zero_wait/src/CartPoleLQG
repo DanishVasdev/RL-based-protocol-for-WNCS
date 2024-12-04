@@ -1,0 +1,41 @@
+#ifndef CARTPOLELQG_H
+#define CARTPOLELQG_H
+
+#include <vector>
+#include <Eigen/Dense>  // Use Eigen library for matrix operations
+
+class CartPoleLQG {
+public:
+    CartPoleLQG();
+
+    // State update
+    Eigen::VectorXd update(const Eigen::VectorXd &state, const Eigen::VectorXd &measurements);
+
+private:
+    // System parameters
+    double M;  // Mass of the cart
+    double m;  // Mass of the pole
+    double l;  // Length of the pole
+    double g;  // Gravity constant
+
+    // Matrices for state-space representation
+    Eigen::MatrixXd A;
+    Eigen::MatrixXd B;
+    Eigen::MatrixXd C;
+    Eigen::MatrixXd Q;
+    Eigen::MatrixXd R;
+    Eigen::MatrixXd L;  // Kalman gain
+
+    Eigen::MatrixXd K;  // LQR gain matrix
+    Eigen::VectorXd stateEstimate;
+
+    // Helper functions
+    void initializeSystem();
+    void computeLQRGain();
+    void computeKalmanGain();
+
+    // Simulate system step
+    Eigen::VectorXd simulateSystem(const Eigen::VectorXd &state, double force);
+};
+
+#endif // CARTPOLELQG_H

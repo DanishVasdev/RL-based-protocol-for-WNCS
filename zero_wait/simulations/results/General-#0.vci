@@ -1,0 +1,1022 @@
+file 1595171 1732503585                                         
+version 3
+run General-0-20241125-02:17:09-14696
+attr configname General
+attr datetime 20241125-02:17:09
+attr datetimef 20241125-021709
+attr experiment General
+attr inifile omnetpp.ini
+attr iterationvars ""
+attr iterationvarsd ""
+attr iterationvarsf ""
+attr measurement ""
+attr network ZeroWaitNetwork
+attr processid 14696
+attr repetition 0
+attr replication #0
+attr resultdir results
+attr runnumber 0
+attr seedset 0
+config image-path ../../inet4.5/images
+config network ZeroWaitNetwork
+config sim-time-limit 100s
+config *.control.numApps 1
+config *.sensor*.numApps 1
+config *.control.app[0].typename DQNControllerApp
+config *.control.app[0].destAddresses "\"sensor0 sensor1 sensor2 sensor3 sensor4 sensor5 sensor6\""
+config *.sensor*.app[0].typename DQNSensorApp
+config *.sensor*.app[0].destAddresses "\"control\""
+config *.control.app[0].destPort 1000
+config *.control.app[0].localPort 1000
+config *.sensor*.app[0].destPort 1000
+config *.sensor*.app[0].localPort 1000
+config *.control.app[0].packetSize 10Byte
+config *.sensor*.app[0].packetSize 10Byte
+config *.control.app[0].messageLength 10Byte
+config *.sensor*.app[0].messageLength 10Byte
+config *.control.app[0].useAutoConfig true
+config *.sensor*.app[0].useAutoConfig true
+config *.control.app[0].startTime 2s
+config *.sensor[0].app[0].startTime 3s
+config *.sensor[1].app[0].startTime 4s
+config *.sensor[2].app[0].startTime 5s
+config *.sensor[3].app[0].startTime 6s
+config *.sensor[4].app[0].startTime 7s
+config *.sensor[5].app[0].startTime 8s
+config *.sensor[6].app[0].startTime 9s
+config *.sensor[7].app[0].startTime 9s
+config *.sensor[8].app[0].startTime 9s
+config *.sensor[9].app[0].startTime 9s
+config *.sensor[10].app[0].startTime 9s
+config *.control.app[0].sendInterval exponential(1s)
+config *.sensor[0].app[0].sendInterval exponential(1s)
+config *.sensor[1].app[0].sendInterval exponential(1.2s)
+config *.sensor[2].app[0].sendInterval exponential(1.4s)
+config *.sensor[3].app[0].sendInterval exponential(1.6s)
+config *.sensor[4].app[0].sendInterval exponential(1.8s)
+config *.sensor[5].app[0].sendInterval exponential(2s)
+config *.sensor[6].app[0].sendInterval exponential(2.2s)
+config *.control.wlan[0].typename WirelessInterface
+config *.sensor*.wlan[0].typename WirelessInterface
+config *.control.wlan[0].radio.typename UnitDiskRadio
+config *.sensor*.wlan[0].radio.typename UnitDiskRadio
+config *.control.wlan[0].mac.typename CsmaCaMac
+config *.control.wlan[0].mac.ackTimeout 300us
+config *.control.wlan[0].queue.typename DropTailQueue
+config *.control.wlan[0].queue.packetCapacity 10
+config *.control.wlan[0].mac.useAck true
+config *.sensor*.wlan[0].mac.typename CsmaCaMac
+config *.sensor*.wlan[0].mac.ackTimeout 300us
+config *.sensor*.wlan[0].queue.typename DropTailQueue
+config *.sensor*.wlan[0].queue.packetCapacity 10
+config *.sensor*.wlan[0].mac.useAck true
+config *.control.wlan[0].radio.transmitter.communicationRange 500m
+config *.sensor*.wlan[0].radio.transmitter.communicationRange 500m
+config *.control.wlan[0].radio.transmitter.bitrate 1Mbps
+config *.sensor*.wlan[0].radio.transmitter.bitrate 1Mbps
+config *.control.wlan[*].bitrate 1Mbps
+config *.sensor*.wlan[*].bitrate 1Mbps
+config record-eventlog false
+config *.visualizer.mediumVisualizer.displayCommunicationRanges true
+config *.visualizer.packetDropVisualizer.displayPackets true
+config *.visualizer.queueVisualizer.displayQueues true
+
+vector 0 ZeroWaitNetwork.control.wlan[0].queue queueLength:vector ETV
+attr autoWarmupFilter false
+attr interpolationmode sample-hold
+attr recordingmode vector
+attr source "warmup(atomic(constant0(packetPushEnded) + count(packetPushStarted) - count(packetPulled) - count(packetRemoved) - count(packetDropped)))"
+attr title "queue length"
+attr unit pk
+vector 1 ZeroWaitNetwork.control.wlan[0].queue queueBitLength:vector ETV
+attr autoWarmupFilter false
+attr interpolationmode sample-hold
+attr recordingmode vector
+attr source "warmup(atomic(constant0(packetPushEnded) + sum(packetLength(packetPushStarted)) - sum(packetLength(packetPulled)) - sum(packetLength(packetRemoved)) - sum(packetLength(packetDropped))))"
+attr title "queue bit length"
+attr unit b
+vector 2 ZeroWaitNetwork.control.udp passedUpPk:vector(count) ETV
+attr interpolationmode none
+attr recordingmode vector(count)
+attr source packetSentToUpper
+attr title "packets passed up, count"
+vector 3 ZeroWaitNetwork.control.udp droppedPkWrongPort:vector(count) ETV
+attr interpolationmode none
+attr recordingmode vector(count)
+attr source packetDropReasonIsNoPortFound(packetDropped)
+attr title "packets dropped (wrong port), count"
+vector 4 ZeroWaitNetwork.control.udp droppedPkBadChecksum:vector(count) ETV
+attr interpolationmode none
+attr recordingmode vector(count)
+attr source packetDropReasonIsIncorrectlyReceived(packetDropped)
+attr title "packets dropped (checksum error), count"
+vector 5 ZeroWaitNetwork.sensor0.wlan[0].queue queueLength:vector ETV
+attr autoWarmupFilter false
+attr interpolationmode sample-hold
+attr recordingmode vector
+attr source "warmup(atomic(constant0(packetPushEnded) + count(packetPushStarted) - count(packetPulled) - count(packetRemoved) - count(packetDropped)))"
+attr title "queue length"
+attr unit pk
+vector 6 ZeroWaitNetwork.sensor0.wlan[0].queue queueBitLength:vector ETV
+attr autoWarmupFilter false
+attr interpolationmode sample-hold
+attr recordingmode vector
+attr source "warmup(atomic(constant0(packetPushEnded) + sum(packetLength(packetPushStarted)) - sum(packetLength(packetPulled)) - sum(packetLength(packetRemoved)) - sum(packetLength(packetDropped))))"
+attr title "queue bit length"
+attr unit b
+vector 7 ZeroWaitNetwork.sensor0.udp passedUpPk:vector(count) ETV
+attr interpolationmode none
+attr recordingmode vector(count)
+attr source packetSentToUpper
+attr title "packets passed up, count"
+vector 8 ZeroWaitNetwork.sensor0.udp droppedPkWrongPort:vector(count) ETV
+attr interpolationmode none
+attr recordingmode vector(count)
+attr source packetDropReasonIsNoPortFound(packetDropped)
+attr title "packets dropped (wrong port), count"
+vector 9 ZeroWaitNetwork.sensor0.udp droppedPkBadChecksum:vector(count) ETV
+attr interpolationmode none
+attr recordingmode vector(count)
+attr source packetDropReasonIsIncorrectlyReceived(packetDropped)
+attr title "packets dropped (checksum error), count"
+vector 10 ZeroWaitNetwork.sensor1.wlan[0].queue queueLength:vector ETV
+attr autoWarmupFilter false
+attr interpolationmode sample-hold
+attr recordingmode vector
+attr source "warmup(atomic(constant0(packetPushEnded) + count(packetPushStarted) - count(packetPulled) - count(packetRemoved) - count(packetDropped)))"
+attr title "queue length"
+attr unit pk
+vector 11 ZeroWaitNetwork.sensor1.wlan[0].queue queueBitLength:vector ETV
+attr autoWarmupFilter false
+attr interpolationmode sample-hold
+attr recordingmode vector
+attr source "warmup(atomic(constant0(packetPushEnded) + sum(packetLength(packetPushStarted)) - sum(packetLength(packetPulled)) - sum(packetLength(packetRemoved)) - sum(packetLength(packetDropped))))"
+attr title "queue bit length"
+attr unit b
+vector 12 ZeroWaitNetwork.sensor1.udp passedUpPk:vector(count) ETV
+attr interpolationmode none
+attr recordingmode vector(count)
+attr source packetSentToUpper
+attr title "packets passed up, count"
+vector 13 ZeroWaitNetwork.sensor1.udp droppedPkWrongPort:vector(count) ETV
+attr interpolationmode none
+attr recordingmode vector(count)
+attr source packetDropReasonIsNoPortFound(packetDropped)
+attr title "packets dropped (wrong port), count"
+vector 14 ZeroWaitNetwork.sensor1.udp droppedPkBadChecksum:vector(count) ETV
+attr interpolationmode none
+attr recordingmode vector(count)
+attr source packetDropReasonIsIncorrectlyReceived(packetDropped)
+attr title "packets dropped (checksum error), count"
+vector 15 ZeroWaitNetwork.sensor2.wlan[0].queue queueLength:vector ETV
+attr autoWarmupFilter false
+attr interpolationmode sample-hold
+attr recordingmode vector
+attr source "warmup(atomic(constant0(packetPushEnded) + count(packetPushStarted) - count(packetPulled) - count(packetRemoved) - count(packetDropped)))"
+attr title "queue length"
+attr unit pk
+vector 16 ZeroWaitNetwork.sensor2.wlan[0].queue queueBitLength:vector ETV
+attr autoWarmupFilter false
+attr interpolationmode sample-hold
+attr recordingmode vector
+attr source "warmup(atomic(constant0(packetPushEnded) + sum(packetLength(packetPushStarted)) - sum(packetLength(packetPulled)) - sum(packetLength(packetRemoved)) - sum(packetLength(packetDropped))))"
+attr title "queue bit length"
+attr unit b
+vector 17 ZeroWaitNetwork.sensor2.udp passedUpPk:vector(count) ETV
+attr interpolationmode none
+attr recordingmode vector(count)
+attr source packetSentToUpper
+attr title "packets passed up, count"
+vector 18 ZeroWaitNetwork.sensor2.udp droppedPkWrongPort:vector(count) ETV
+attr interpolationmode none
+attr recordingmode vector(count)
+attr source packetDropReasonIsNoPortFound(packetDropped)
+attr title "packets dropped (wrong port), count"
+vector 19 ZeroWaitNetwork.sensor2.udp droppedPkBadChecksum:vector(count) ETV
+attr interpolationmode none
+attr recordingmode vector(count)
+attr source packetDropReasonIsIncorrectlyReceived(packetDropped)
+attr title "packets dropped (checksum error), count"
+vector 20 ZeroWaitNetwork.sensor3.wlan[0].queue queueLength:vector ETV
+attr autoWarmupFilter false
+attr interpolationmode sample-hold
+attr recordingmode vector
+attr source "warmup(atomic(constant0(packetPushEnded) + count(packetPushStarted) - count(packetPulled) - count(packetRemoved) - count(packetDropped)))"
+attr title "queue length"
+attr unit pk
+vector 21 ZeroWaitNetwork.sensor3.wlan[0].queue queueBitLength:vector ETV
+attr autoWarmupFilter false
+attr interpolationmode sample-hold
+attr recordingmode vector
+attr source "warmup(atomic(constant0(packetPushEnded) + sum(packetLength(packetPushStarted)) - sum(packetLength(packetPulled)) - sum(packetLength(packetRemoved)) - sum(packetLength(packetDropped))))"
+attr title "queue bit length"
+attr unit b
+vector 22 ZeroWaitNetwork.sensor3.udp passedUpPk:vector(count) ETV
+attr interpolationmode none
+attr recordingmode vector(count)
+attr source packetSentToUpper
+attr title "packets passed up, count"
+vector 23 ZeroWaitNetwork.sensor3.udp droppedPkWrongPort:vector(count) ETV
+attr interpolationmode none
+attr recordingmode vector(count)
+attr source packetDropReasonIsNoPortFound(packetDropped)
+attr title "packets dropped (wrong port), count"
+vector 24 ZeroWaitNetwork.sensor3.udp droppedPkBadChecksum:vector(count) ETV
+attr interpolationmode none
+attr recordingmode vector(count)
+attr source packetDropReasonIsIncorrectlyReceived(packetDropped)
+attr title "packets dropped (checksum error), count"
+vector 25 ZeroWaitNetwork.sensor4.wlan[0].queue queueLength:vector ETV
+attr autoWarmupFilter false
+attr interpolationmode sample-hold
+attr recordingmode vector
+attr source "warmup(atomic(constant0(packetPushEnded) + count(packetPushStarted) - count(packetPulled) - count(packetRemoved) - count(packetDropped)))"
+attr title "queue length"
+attr unit pk
+vector 26 ZeroWaitNetwork.sensor4.wlan[0].queue queueBitLength:vector ETV
+attr autoWarmupFilter false
+attr interpolationmode sample-hold
+attr recordingmode vector
+attr source "warmup(atomic(constant0(packetPushEnded) + sum(packetLength(packetPushStarted)) - sum(packetLength(packetPulled)) - sum(packetLength(packetRemoved)) - sum(packetLength(packetDropped))))"
+attr title "queue bit length"
+attr unit b
+vector 27 ZeroWaitNetwork.sensor4.udp passedUpPk:vector(count) ETV
+attr interpolationmode none
+attr recordingmode vector(count)
+attr source packetSentToUpper
+attr title "packets passed up, count"
+vector 28 ZeroWaitNetwork.sensor4.udp droppedPkWrongPort:vector(count) ETV
+attr interpolationmode none
+attr recordingmode vector(count)
+attr source packetDropReasonIsNoPortFound(packetDropped)
+attr title "packets dropped (wrong port), count"
+vector 29 ZeroWaitNetwork.sensor4.udp droppedPkBadChecksum:vector(count) ETV
+attr interpolationmode none
+attr recordingmode vector(count)
+attr source packetDropReasonIsIncorrectlyReceived(packetDropped)
+attr title "packets dropped (checksum error), count"
+vector 30 ZeroWaitNetwork.sensor5.wlan[0].queue queueLength:vector ETV
+attr autoWarmupFilter false
+attr interpolationmode sample-hold
+attr recordingmode vector
+attr source "warmup(atomic(constant0(packetPushEnded) + count(packetPushStarted) - count(packetPulled) - count(packetRemoved) - count(packetDropped)))"
+attr title "queue length"
+attr unit pk
+vector 31 ZeroWaitNetwork.sensor5.wlan[0].queue queueBitLength:vector ETV
+attr autoWarmupFilter false
+attr interpolationmode sample-hold
+attr recordingmode vector
+attr source "warmup(atomic(constant0(packetPushEnded) + sum(packetLength(packetPushStarted)) - sum(packetLength(packetPulled)) - sum(packetLength(packetRemoved)) - sum(packetLength(packetDropped))))"
+attr title "queue bit length"
+attr unit b
+vector 32 ZeroWaitNetwork.sensor5.udp passedUpPk:vector(count) ETV
+attr interpolationmode none
+attr recordingmode vector(count)
+attr source packetSentToUpper
+attr title "packets passed up, count"
+vector 33 ZeroWaitNetwork.sensor5.udp droppedPkWrongPort:vector(count) ETV
+attr interpolationmode none
+attr recordingmode vector(count)
+attr source packetDropReasonIsNoPortFound(packetDropped)
+attr title "packets dropped (wrong port), count"
+vector 34 ZeroWaitNetwork.sensor5.udp droppedPkBadChecksum:vector(count) ETV
+attr interpolationmode none
+attr recordingmode vector(count)
+attr source packetDropReasonIsIncorrectlyReceived(packetDropped)
+attr title "packets dropped (checksum error), count"
+vector 35 ZeroWaitNetwork.sensor6.wlan[0].queue queueLength:vector ETV
+attr autoWarmupFilter false
+attr interpolationmode sample-hold
+attr recordingmode vector
+attr source "warmup(atomic(constant0(packetPushEnded) + count(packetPushStarted) - count(packetPulled) - count(packetRemoved) - count(packetDropped)))"
+attr title "queue length"
+attr unit pk
+vector 36 ZeroWaitNetwork.sensor6.wlan[0].queue queueBitLength:vector ETV
+attr autoWarmupFilter false
+attr interpolationmode sample-hold
+attr recordingmode vector
+attr source "warmup(atomic(constant0(packetPushEnded) + sum(packetLength(packetPushStarted)) - sum(packetLength(packetPulled)) - sum(packetLength(packetRemoved)) - sum(packetLength(packetDropped))))"
+attr title "queue bit length"
+attr unit b
+vector 37 ZeroWaitNetwork.sensor6.udp passedUpPk:vector(count) ETV
+attr interpolationmode none
+attr recordingmode vector(count)
+attr source packetSentToUpper
+attr title "packets passed up, count"
+vector 38 ZeroWaitNetwork.sensor6.udp droppedPkWrongPort:vector(count) ETV
+attr interpolationmode none
+attr recordingmode vector(count)
+attr source packetDropReasonIsNoPortFound(packetDropped)
+attr title "packets dropped (wrong port), count"
+vector 39 ZeroWaitNetwork.sensor6.udp droppedPkBadChecksum:vector(count) ETV
+attr interpolationmode none
+attr recordingmode vector(count)
+attr source packetDropReasonIsIncorrectlyReceived(packetDropped)
+attr title "packets dropped (checksum error), count"
+vector 40 ZeroWaitNetwork.control.wlan[0].radio radioMode:vector ETV
+attr interpolationmode sample-hold
+attr recordingmode vector
+attr source radioModeChanged
+attr title "Radio mode"
+vector 41 ZeroWaitNetwork.sensor0.wlan[0].radio radioMode:vector ETV
+attr interpolationmode sample-hold
+attr recordingmode vector
+attr source radioModeChanged
+attr title "Radio mode"
+vector 42 ZeroWaitNetwork.sensor1.wlan[0].radio radioMode:vector ETV
+attr interpolationmode sample-hold
+attr recordingmode vector
+attr source radioModeChanged
+attr title "Radio mode"
+vector 43 ZeroWaitNetwork.sensor2.wlan[0].radio radioMode:vector ETV
+attr interpolationmode sample-hold
+attr recordingmode vector
+attr source radioModeChanged
+attr title "Radio mode"
+vector 44 ZeroWaitNetwork.sensor3.wlan[0].radio radioMode:vector ETV
+attr interpolationmode sample-hold
+attr recordingmode vector
+attr source radioModeChanged
+attr title "Radio mode"
+vector 45 ZeroWaitNetwork.sensor4.wlan[0].radio radioMode:vector ETV
+attr interpolationmode sample-hold
+attr recordingmode vector
+attr source radioModeChanged
+attr title "Radio mode"
+vector 46 ZeroWaitNetwork.sensor5.wlan[0].radio radioMode:vector ETV
+attr interpolationmode sample-hold
+attr recordingmode vector
+attr source radioModeChanged
+attr title "Radio mode"
+vector 47 ZeroWaitNetwork.sensor6.wlan[0].radio radioMode:vector ETV
+attr interpolationmode sample-hold
+attr recordingmode vector
+attr source radioModeChanged
+attr title "Radio mode"
+vector 48 ZeroWaitNetwork.control.wlan[0].radio receptionState:vector ETV
+attr interpolationmode sample-hold
+attr recordingmode vector
+attr source receptionStateChanged
+attr title "Radio reception state"
+vector 49 ZeroWaitNetwork.sensor0.wlan[0].radio receptionState:vector ETV
+attr interpolationmode sample-hold
+attr recordingmode vector
+attr source receptionStateChanged
+attr title "Radio reception state"
+vector 50 ZeroWaitNetwork.sensor1.wlan[0].radio receptionState:vector ETV
+attr interpolationmode sample-hold
+attr recordingmode vector
+attr source receptionStateChanged
+attr title "Radio reception state"
+vector 51 ZeroWaitNetwork.sensor2.wlan[0].radio receptionState:vector ETV
+attr interpolationmode sample-hold
+attr recordingmode vector
+attr source receptionStateChanged
+attr title "Radio reception state"
+vector 52 ZeroWaitNetwork.sensor3.wlan[0].radio receptionState:vector ETV
+attr interpolationmode sample-hold
+attr recordingmode vector
+attr source receptionStateChanged
+attr title "Radio reception state"
+vector 53 ZeroWaitNetwork.sensor4.wlan[0].radio receptionState:vector ETV
+attr interpolationmode sample-hold
+attr recordingmode vector
+attr source receptionStateChanged
+attr title "Radio reception state"
+vector 54 ZeroWaitNetwork.sensor5.wlan[0].radio receptionState:vector ETV
+attr interpolationmode sample-hold
+attr recordingmode vector
+attr source receptionStateChanged
+attr title "Radio reception state"
+vector 55 ZeroWaitNetwork.sensor6.wlan[0].radio receptionState:vector ETV
+attr interpolationmode sample-hold
+attr recordingmode vector
+attr source receptionStateChanged
+attr title "Radio reception state"
+vector 56 ZeroWaitNetwork.sensor2.udp packetSent:vector(packetBytes) ETV
+attr interpolationmode none
+attr recordingmode vector(packetBytes)
+attr source packetSent
+attr title "packets sent, packetBytes"
+vector 57 ZeroWaitNetwork.sensor3.udp packetSent:vector(packetBytes) ETV
+attr interpolationmode none
+attr recordingmode vector(packetBytes)
+attr source packetSent
+attr title "packets sent, packetBytes"
+vector 58 ZeroWaitNetwork.sensor6.udp packetSent:vector(packetBytes) ETV
+attr interpolationmode none
+attr recordingmode vector(packetBytes)
+attr source packetSent
+attr title "packets sent, packetBytes"
+vector 59 ZeroWaitNetwork.sensor2.ipv4.arp arpRequestSent:vector(packetBytes) ETV
+attr recordingmode vector(packetBytes)
+attr source arpRequestSent
+attr title "ARP request sent, packetBytes"
+vector 60 ZeroWaitNetwork.sensor3.ipv4.arp arpRequestSent:vector(packetBytes) ETV
+attr recordingmode vector(packetBytes)
+attr source arpRequestSent
+attr title "ARP request sent, packetBytes"
+vector 61 ZeroWaitNetwork.sensor6.ipv4.arp arpRequestSent:vector(packetBytes) ETV
+attr recordingmode vector(packetBytes)
+attr source arpRequestSent
+attr title "ARP request sent, packetBytes"
+vector 62 ZeroWaitNetwork.sensor2.wlan[0].queue incomingPacketLengths:vector ETV
+attr interpolationmode none
+attr recordingmode vector
+attr source packetLength(packetPushStarted)
+attr title "incoming packet lengths"
+attr unit b
+vector 63 ZeroWaitNetwork.sensor2.wlan[0].queue incomingDataRate:vector ETV
+attr interpolationmode linear
+attr recordingmode vector
+attr source throughput(packetPushStarted)
+attr title "incoming datarate"
+attr unit bps
+vector 64 ZeroWaitNetwork.sensor2.wlan[0].queue queueingTime:vector ETV
+attr interpolationmode none
+attr recordingmode vector
+attr source queueingTime(packetPulled)
+attr title "queueing times"
+attr unit s
+vector 65 ZeroWaitNetwork.sensor2.wlan[0].queue outgoingPacketLengths:vector ETV
+attr interpolationmode none
+attr recordingmode vector
+attr source packetLength(packetPulled)
+attr title "outgoing packet lengths"
+attr unit b
+vector 66 ZeroWaitNetwork.sensor2.wlan[0].queue outgoingDataRate:vector ETV
+attr interpolationmode linear
+attr recordingmode vector
+attr source throughput(packetPulled)
+attr title "outgoing datarate"
+attr unit bps
+vector 67 ZeroWaitNetwork.sensor3.wlan[0].queue incomingPacketLengths:vector ETV
+attr interpolationmode none
+attr recordingmode vector
+attr source packetLength(packetPushStarted)
+attr title "incoming packet lengths"
+attr unit b
+vector 68 ZeroWaitNetwork.sensor3.wlan[0].queue incomingDataRate:vector ETV
+attr interpolationmode linear
+attr recordingmode vector
+attr source throughput(packetPushStarted)
+attr title "incoming datarate"
+attr unit bps
+vector 69 ZeroWaitNetwork.sensor3.wlan[0].queue queueingTime:vector ETV
+attr interpolationmode none
+attr recordingmode vector
+attr source queueingTime(packetPulled)
+attr title "queueing times"
+attr unit s
+vector 70 ZeroWaitNetwork.sensor3.wlan[0].queue outgoingPacketLengths:vector ETV
+attr interpolationmode none
+attr recordingmode vector
+attr source packetLength(packetPulled)
+attr title "outgoing packet lengths"
+attr unit b
+vector 71 ZeroWaitNetwork.sensor3.wlan[0].queue outgoingDataRate:vector ETV
+attr interpolationmode linear
+attr recordingmode vector
+attr source throughput(packetPulled)
+attr title "outgoing datarate"
+attr unit bps
+vector 72 ZeroWaitNetwork.sensor6.wlan[0].queue incomingPacketLengths:vector ETV
+attr interpolationmode none
+attr recordingmode vector
+attr source packetLength(packetPushStarted)
+attr title "incoming packet lengths"
+attr unit b
+vector 73 ZeroWaitNetwork.sensor6.wlan[0].queue incomingDataRate:vector ETV
+attr interpolationmode linear
+attr recordingmode vector
+attr source throughput(packetPushStarted)
+attr title "incoming datarate"
+attr unit bps
+vector 74 ZeroWaitNetwork.sensor6.wlan[0].queue queueingTime:vector ETV
+attr interpolationmode none
+attr recordingmode vector
+attr source queueingTime(packetPulled)
+attr title "queueing times"
+attr unit s
+vector 75 ZeroWaitNetwork.sensor6.wlan[0].queue outgoingPacketLengths:vector ETV
+attr interpolationmode none
+attr recordingmode vector
+attr source packetLength(packetPulled)
+attr title "outgoing packet lengths"
+attr unit b
+vector 76 ZeroWaitNetwork.sensor6.wlan[0].queue outgoingDataRate:vector ETV
+attr interpolationmode linear
+attr recordingmode vector
+attr source throughput(packetPulled)
+attr title "outgoing datarate"
+attr unit bps
+vector 77 ZeroWaitNetwork.sensor3.wlan[0].radio transmissionState:vector ETV
+attr interpolationmode sample-hold
+attr recordingmode vector
+attr source transmissionStateChanged
+attr title "Radio transmission state"
+vector 78 ZeroWaitNetwork.control.ipv4.arp arpReplySent:vector(packetBytes) ETV
+attr recordingmode vector(packetBytes)
+attr source arpReplySent
+attr title "ARP replies sent, packetBytes"
+vector 79 ZeroWaitNetwork.control.wlan[0].queue incomingPacketLengths:vector ETV
+attr interpolationmode none
+attr recordingmode vector
+attr source packetLength(packetPushStarted)
+attr title "incoming packet lengths"
+attr unit b
+vector 80 ZeroWaitNetwork.control.wlan[0].queue incomingDataRate:vector ETV
+attr interpolationmode linear
+attr recordingmode vector
+attr source throughput(packetPushStarted)
+attr title "incoming datarate"
+attr unit bps
+vector 81 ZeroWaitNetwork.control.wlan[0].queue queueingTime:vector ETV
+attr interpolationmode none
+attr recordingmode vector
+attr source queueingTime(packetPulled)
+attr title "queueing times"
+attr unit s
+vector 82 ZeroWaitNetwork.control.wlan[0].queue outgoingPacketLengths:vector ETV
+attr interpolationmode none
+attr recordingmode vector
+attr source packetLength(packetPulled)
+attr title "outgoing packet lengths"
+attr unit b
+vector 83 ZeroWaitNetwork.control.wlan[0].queue outgoingDataRate:vector ETV
+attr interpolationmode linear
+attr recordingmode vector
+attr source throughput(packetPulled)
+attr title "outgoing datarate"
+attr unit bps
+vector 84 ZeroWaitNetwork.sensor2.wlan[0].radio transmissionState:vector ETV
+attr interpolationmode sample-hold
+attr recordingmode vector
+attr source transmissionStateChanged
+attr title "Radio transmission state"
+vector 85 ZeroWaitNetwork.control.wlan[0].radio transmissionState:vector ETV
+attr interpolationmode sample-hold
+attr recordingmode vector
+attr source transmissionStateChanged
+attr title "Radio transmission state"
+vector 86 ZeroWaitNetwork.sensor6.wlan[0].mac packetDropNotAddressedToUs:vector(packetBytes) ETV
+attr interpolationmode none
+attr recordingmode vector(packetBytes)
+attr source packetDropReasonIsNotAddressedToUs(packetDropped)
+attr title "packet drop: not addressed to us, packetBytes"
+vector 87 ZeroWaitNetwork.sensor5.wlan[0].mac packetDropNotAddressedToUs:vector(packetBytes) ETV
+attr interpolationmode none
+attr recordingmode vector(packetBytes)
+attr source packetDropReasonIsNotAddressedToUs(packetDropped)
+attr title "packet drop: not addressed to us, packetBytes"
+vector 88 ZeroWaitNetwork.sensor0.wlan[0].mac packetDropNotAddressedToUs:vector(packetBytes) ETV
+attr interpolationmode none
+attr recordingmode vector(packetBytes)
+attr source packetDropReasonIsNotAddressedToUs(packetDropped)
+attr title "packet drop: not addressed to us, packetBytes"
+vector 89 ZeroWaitNetwork.sensor4.wlan[0].mac packetDropNotAddressedToUs:vector(packetBytes) ETV
+attr interpolationmode none
+attr recordingmode vector(packetBytes)
+attr source packetDropReasonIsNotAddressedToUs(packetDropped)
+attr title "packet drop: not addressed to us, packetBytes"
+vector 90 ZeroWaitNetwork.sensor2.wlan[0].mac packetDropNotAddressedToUs:vector(packetBytes) ETV
+attr interpolationmode none
+attr recordingmode vector(packetBytes)
+attr source packetDropReasonIsNotAddressedToUs(packetDropped)
+attr title "packet drop: not addressed to us, packetBytes"
+vector 91 ZeroWaitNetwork.sensor1.wlan[0].mac packetDropNotAddressedToUs:vector(packetBytes) ETV
+attr interpolationmode none
+attr recordingmode vector(packetBytes)
+attr source packetDropReasonIsNotAddressedToUs(packetDropped)
+attr title "packet drop: not addressed to us, packetBytes"
+vector 92 ZeroWaitNetwork.sensor6.wlan[0].radio transmissionState:vector ETV
+attr interpolationmode sample-hold
+attr recordingmode vector
+attr source transmissionStateChanged
+attr title "Radio transmission state"
+vector 93 ZeroWaitNetwork.control.udp packetReceived:vector(packetBytes) ETV
+attr interpolationmode none
+attr recordingmode vector(packetBytes)
+attr source packetReceived
+attr title "packets received, packetBytes"
+vector 94 ZeroWaitNetwork.control.udp packetSent:vector(packetBytes) ETV
+attr interpolationmode none
+attr recordingmode vector(packetBytes)
+attr source packetSent
+attr title "packets sent, packetBytes"
+vector 95 ZeroWaitNetwork.sensor3.wlan[0].mac packetDropNotAddressedToUs:vector(packetBytes) ETV
+attr interpolationmode none
+attr recordingmode vector(packetBytes)
+attr source packetDropReasonIsNotAddressedToUs(packetDropped)
+attr title "packet drop: not addressed to us, packetBytes"
+vector 96 ZeroWaitNetwork.sensor3.udp packetReceived:vector(packetBytes) ETV
+attr interpolationmode none
+attr recordingmode vector(packetBytes)
+attr source packetReceived
+attr title "packets received, packetBytes"
+vector 97 ZeroWaitNetwork.sensor2.udp packetReceived:vector(packetBytes) ETV
+attr interpolationmode none
+attr recordingmode vector(packetBytes)
+attr source packetReceived
+attr title "packets received, packetBytes"
+vector 98 ZeroWaitNetwork.sensor6.udp packetReceived:vector(packetBytes) ETV
+attr interpolationmode none
+attr recordingmode vector(packetBytes)
+attr source packetReceived
+attr title "packets received, packetBytes"
+vector 99 ZeroWaitNetwork.sensor0.udp packetSent:vector(packetBytes) ETV
+attr interpolationmode none
+attr recordingmode vector(packetBytes)
+attr source packetSent
+attr title "packets sent, packetBytes"
+vector 100 ZeroWaitNetwork.sensor1.udp packetSent:vector(packetBytes) ETV
+attr interpolationmode none
+attr recordingmode vector(packetBytes)
+attr source packetSent
+attr title "packets sent, packetBytes"
+vector 101 ZeroWaitNetwork.sensor5.udp packetSent:vector(packetBytes) ETV
+attr interpolationmode none
+attr recordingmode vector(packetBytes)
+attr source packetSent
+attr title "packets sent, packetBytes"
+vector 102 ZeroWaitNetwork.sensor0.ipv4.arp arpRequestSent:vector(packetBytes) ETV
+attr recordingmode vector(packetBytes)
+attr source arpRequestSent
+attr title "ARP request sent, packetBytes"
+vector 103 ZeroWaitNetwork.sensor1.ipv4.arp arpRequestSent:vector(packetBytes) ETV
+attr recordingmode vector(packetBytes)
+attr source arpRequestSent
+attr title "ARP request sent, packetBytes"
+vector 104 ZeroWaitNetwork.sensor5.ipv4.arp arpRequestSent:vector(packetBytes) ETV
+attr recordingmode vector(packetBytes)
+attr source arpRequestSent
+attr title "ARP request sent, packetBytes"
+vector 105 ZeroWaitNetwork.sensor0.wlan[0].queue incomingPacketLengths:vector ETV
+attr interpolationmode none
+attr recordingmode vector
+attr source packetLength(packetPushStarted)
+attr title "incoming packet lengths"
+attr unit b
+vector 106 ZeroWaitNetwork.sensor0.wlan[0].queue incomingDataRate:vector ETV
+attr interpolationmode linear
+attr recordingmode vector
+attr source throughput(packetPushStarted)
+attr title "incoming datarate"
+attr unit bps
+vector 107 ZeroWaitNetwork.sensor0.wlan[0].queue queueingTime:vector ETV
+attr interpolationmode none
+attr recordingmode vector
+attr source queueingTime(packetPulled)
+attr title "queueing times"
+attr unit s
+vector 108 ZeroWaitNetwork.sensor0.wlan[0].queue outgoingPacketLengths:vector ETV
+attr interpolationmode none
+attr recordingmode vector
+attr source packetLength(packetPulled)
+attr title "outgoing packet lengths"
+attr unit b
+vector 109 ZeroWaitNetwork.sensor0.wlan[0].queue outgoingDataRate:vector ETV
+attr interpolationmode linear
+attr recordingmode vector
+attr source throughput(packetPulled)
+attr title "outgoing datarate"
+attr unit bps
+vector 110 ZeroWaitNetwork.sensor1.wlan[0].queue incomingPacketLengths:vector ETV
+attr interpolationmode none
+attr recordingmode vector
+attr source packetLength(packetPushStarted)
+attr title "incoming packet lengths"
+attr unit b
+vector 111 ZeroWaitNetwork.sensor1.wlan[0].queue incomingDataRate:vector ETV
+attr interpolationmode linear
+attr recordingmode vector
+attr source throughput(packetPushStarted)
+attr title "incoming datarate"
+attr unit bps
+vector 112 ZeroWaitNetwork.sensor1.wlan[0].queue queueingTime:vector ETV
+attr interpolationmode none
+attr recordingmode vector
+attr source queueingTime(packetPulled)
+attr title "queueing times"
+attr unit s
+vector 113 ZeroWaitNetwork.sensor1.wlan[0].queue outgoingPacketLengths:vector ETV
+attr interpolationmode none
+attr recordingmode vector
+attr source packetLength(packetPulled)
+attr title "outgoing packet lengths"
+attr unit b
+vector 114 ZeroWaitNetwork.sensor1.wlan[0].queue outgoingDataRate:vector ETV
+attr interpolationmode linear
+attr recordingmode vector
+attr source throughput(packetPulled)
+attr title "outgoing datarate"
+attr unit bps
+vector 115 ZeroWaitNetwork.sensor5.wlan[0].queue incomingPacketLengths:vector ETV
+attr interpolationmode none
+attr recordingmode vector
+attr source packetLength(packetPushStarted)
+attr title "incoming packet lengths"
+attr unit b
+vector 116 ZeroWaitNetwork.sensor5.wlan[0].queue incomingDataRate:vector ETV
+attr interpolationmode linear
+attr recordingmode vector
+attr source throughput(packetPushStarted)
+attr title "incoming datarate"
+attr unit bps
+vector 117 ZeroWaitNetwork.sensor5.wlan[0].queue queueingTime:vector ETV
+attr interpolationmode none
+attr recordingmode vector
+attr source queueingTime(packetPulled)
+attr title "queueing times"
+attr unit s
+vector 118 ZeroWaitNetwork.sensor5.wlan[0].queue outgoingPacketLengths:vector ETV
+attr interpolationmode none
+attr recordingmode vector
+attr source packetLength(packetPulled)
+attr title "outgoing packet lengths"
+attr unit b
+vector 119 ZeroWaitNetwork.sensor5.wlan[0].queue outgoingDataRate:vector ETV
+attr interpolationmode linear
+attr recordingmode vector
+attr source throughput(packetPulled)
+attr title "outgoing datarate"
+attr unit bps
+vector 120 ZeroWaitNetwork.sensor0.wlan[0].radio transmissionState:vector ETV
+attr interpolationmode sample-hold
+attr recordingmode vector
+attr source transmissionStateChanged
+attr title "Radio transmission state"
+vector 121 ZeroWaitNetwork.sensor1.wlan[0].radio transmissionState:vector ETV
+attr interpolationmode sample-hold
+attr recordingmode vector
+attr source transmissionStateChanged
+attr title "Radio transmission state"
+vector 122 ZeroWaitNetwork.sensor3.wlan[0].mac packetDropIncorrectlyReceived:vector(packetBytes) ETV
+attr interpolationmode none
+attr recordingmode vector(packetBytes)
+attr source packetDropReasonIsIncorrectlyReceived(packetDropped)
+attr title "packet drop: incorrectly received, packetBytes"
+vector 123 ZeroWaitNetwork.sensor5.wlan[0].mac packetDropIncorrectlyReceived:vector(packetBytes) ETV
+attr interpolationmode none
+attr recordingmode vector(packetBytes)
+attr source packetDropReasonIsIncorrectlyReceived(packetDropped)
+attr title "packet drop: incorrectly received, packetBytes"
+vector 124 ZeroWaitNetwork.control.wlan[0].mac packetDropIncorrectlyReceived:vector(packetBytes) ETV
+attr interpolationmode none
+attr recordingmode vector(packetBytes)
+attr source packetDropReasonIsIncorrectlyReceived(packetDropped)
+attr title "packet drop: incorrectly received, packetBytes"
+vector 125 ZeroWaitNetwork.sensor4.wlan[0].mac packetDropIncorrectlyReceived:vector(packetBytes) ETV
+attr interpolationmode none
+attr recordingmode vector(packetBytes)
+attr source packetDropReasonIsIncorrectlyReceived(packetDropped)
+attr title "packet drop: incorrectly received, packetBytes"
+vector 126 ZeroWaitNetwork.sensor6.wlan[0].mac packetDropIncorrectlyReceived:vector(packetBytes) ETV
+attr interpolationmode none
+attr recordingmode vector(packetBytes)
+attr source packetDropReasonIsIncorrectlyReceived(packetDropped)
+attr title "packet drop: incorrectly received, packetBytes"
+vector 127 ZeroWaitNetwork.sensor2.wlan[0].mac packetDropIncorrectlyReceived:vector(packetBytes) ETV
+attr interpolationmode none
+attr recordingmode vector(packetBytes)
+attr source packetDropReasonIsIncorrectlyReceived(packetDropped)
+attr title "packet drop: incorrectly received, packetBytes"
+vector 128 ZeroWaitNetwork.sensor5.wlan[0].radio transmissionState:vector ETV
+attr interpolationmode sample-hold
+attr recordingmode vector
+attr source transmissionStateChanged
+attr title "Radio transmission state"
+vector 129 ZeroWaitNetwork.sensor5.udp packetReceived:vector(packetBytes) ETV
+attr interpolationmode none
+attr recordingmode vector(packetBytes)
+attr source packetReceived
+attr title "packets received, packetBytes"
+vector 130 ZeroWaitNetwork.sensor4.udp packetSent:vector(packetBytes) ETV
+attr interpolationmode none
+attr recordingmode vector(packetBytes)
+attr source packetSent
+attr title "packets sent, packetBytes"
+vector 131 ZeroWaitNetwork.sensor4.ipv4.arp arpRequestSent:vector(packetBytes) ETV
+attr recordingmode vector(packetBytes)
+attr source arpRequestSent
+attr title "ARP request sent, packetBytes"
+vector 132 ZeroWaitNetwork.sensor4.wlan[0].queue incomingPacketLengths:vector ETV
+attr interpolationmode none
+attr recordingmode vector
+attr source packetLength(packetPushStarted)
+attr title "incoming packet lengths"
+attr unit b
+vector 133 ZeroWaitNetwork.sensor4.wlan[0].queue incomingDataRate:vector ETV
+attr interpolationmode linear
+attr recordingmode vector
+attr source throughput(packetPushStarted)
+attr title "incoming datarate"
+attr unit bps
+vector 134 ZeroWaitNetwork.sensor4.wlan[0].queue queueingTime:vector ETV
+attr interpolationmode none
+attr recordingmode vector
+attr source queueingTime(packetPulled)
+attr title "queueing times"
+attr unit s
+vector 135 ZeroWaitNetwork.sensor4.wlan[0].queue outgoingPacketLengths:vector ETV
+attr interpolationmode none
+attr recordingmode vector
+attr source packetLength(packetPulled)
+attr title "outgoing packet lengths"
+attr unit b
+vector 136 ZeroWaitNetwork.sensor4.wlan[0].queue outgoingDataRate:vector ETV
+attr interpolationmode linear
+attr recordingmode vector
+attr source throughput(packetPulled)
+attr title "outgoing datarate"
+attr unit bps
+vector 137 ZeroWaitNetwork.sensor4.wlan[0].radio transmissionState:vector ETV
+attr interpolationmode sample-hold
+attr recordingmode vector
+attr source transmissionStateChanged
+attr title "Radio transmission state"
+vector 138 ZeroWaitNetwork.sensor1.wlan[0].mac packetDropIncorrectlyReceived:vector(packetBytes) ETV
+attr interpolationmode none
+attr recordingmode vector(packetBytes)
+attr source packetDropReasonIsIncorrectlyReceived(packetDropped)
+attr title "packet drop: incorrectly received, packetBytes"
+vector 139 ZeroWaitNetwork.sensor0.wlan[0].mac packetDropIncorrectlyReceived:vector(packetBytes) ETV
+attr interpolationmode none
+attr recordingmode vector(packetBytes)
+attr source packetDropReasonIsIncorrectlyReceived(packetDropped)
+attr title "packet drop: incorrectly received, packetBytes"
+vector 140 ZeroWaitNetwork.sensor0.udp packetReceived:vector(packetBytes) ETV
+attr interpolationmode none
+attr recordingmode vector(packetBytes)
+attr source packetReceived
+attr title "packets received, packetBytes"
+vector 141 ZeroWaitNetwork.sensor1.udp packetReceived:vector(packetBytes) ETV
+attr interpolationmode none
+attr recordingmode vector(packetBytes)
+attr source packetReceived
+attr title "packets received, packetBytes"
+vector 142 ZeroWaitNetwork.sensor4.udp packetReceived:vector(packetBytes) ETV
+attr interpolationmode none
+attr recordingmode vector(packetBytes)
+attr source packetReceived
+attr title "packets received, packetBytes"
+0	38561 24496 0 63971 0 20.902812862655 938 0 4 674 1004
+1	63057 25584 0 63971 0 20.902812862655 938 0 992 167080 61704128
+2	88641 12972 0 63967 0 20.902812862655 464 0 463 107416 33191544
+3	101613 9 0 0 0 0 1 0 0 0 0
+4	101622 9 0 0 0 0 1 0 0 0 0
+5	101631 1264 0 63281 0 20.7 77 0 6 36 146
+6	102895 1291 0 63281 0 20.7 77 0 1776 10656 12791936
+7	104186 1744 0 63467 0 20.703637657225 65 0 64 2080 89440
+8	105930 9 0 0 0 0 1 0 0 0 0
+9	105939 9 0 0 0 0 1 0 0 0 0
+10	105948 1399 0 63555 0 20.8 80 0 7 49 231
+11	107347 1432 0 63555 0 20.8 80 0 2072 14504 20239296
+12	108779 1867 0 63747 0 20.804017914964 67 0 66 2211 98021
+13	110646 10 0 0 0 0 1 0 0 0 0
+14	110656 10 0 0 0 0 1 0 0 0 0
+15	110666 1115 0 63831 0 20.9 70 0 1 1 1
+16	111781 1117 0 63831 0 20.9 70 0 296 296 87616
+17	112898 1746 0 62170 0 20.203357929367 63 0 62 1953 81375
+18	114644 10 0 0 0 0 1 0 0 0 0
+19	114654 10 0 0 0 0 1 0 0 0 0
+20	114664 1232 0 63832 0 20.9 78 0 1 1 1
+21	115896 1234 0 63832 0 20.9 78 0 296 296 87616
+22	117130 2001 0 64022 0 20.904105440896 72 0 71 2556 121836
+23	119131 10 0 0 0 0 1 0 0 0 0
+24	119141 10 0 0 0 0 1 0 0 0 0
+25	119151 1587 0 63556 0 20.8 89 0 9 81 489
+26	120738 1632 0 63556 0 20.8 89 0 2664 23976 42844224
+27	122370 2049 0 63691 0 20.802844609976 74 0 73 2701 132349
+28	124419 10 0 0 0 0 1 0 0 0 0
+29	124429 10 0 0 0 0 1 0 0 0 0
+30	124439 1074 0 62803 0 20.5 68 0 1 1 1
+31	125513 1076 0 62803 0 20.5 68 0 296 296 87616
+32	126589 1729 0 62936 0 20.502564140314 62 0 61 1891 77531
+33	128318 10 0 0 0 0 1 0 0 0 0
+34	128328 10 0 0 0 0 1 0 0 0 0
+35	128338 1139 0 63833 0 20.9 72 0 1 1 1
+36	129477 1141 0 63833 0 20.9 72 0 296 296 87616
+37	130618 1792 0 63086 0 20.506148067521 65 0 64 2080 89440
+38	132410 10 0 0 0 0 1 0 0 0 0
+39	132420 10 0 0 0 0 1 0 0 0 0
+40	132430 51137 0 64014 0 20.904104862655 1881 0 3 4697 12211
+41	183567 6991 0 63484 0 20.703887657225 271 0 3 672 1746
+42	190558 7118 0 63758 0 20.804267914964 277 0 3 687 1785
+43	197676 6717 0 63959 0 20.902812229493 263 0 3 652 1694
+44	204393 7657 0 63846 0 20.90097 301 0 3 747 1941
+45	212050 7840 0 63706 0 20.803094609976 307 0 3 762 1980
+46	219890 6490 0 62957 0 20.502814140314 253 0 3 627 1629
+47	226380 6876 0 63903 0 20.901871087286 271 0 3 672 1746
+48	233256 102883 0 64014 0 20.904104862655 3784 0 3 4750 10450
+49	336139 102447 0 64024 0 20.904105453369 3782 0 3 7161 17687
+50	438586 102509 0 64030 0 20.904105539282 3785 0 3 7158 17672
+51	541095 102465 0 64028 0 20.904105495817 3784 0 3 7177 17731
+52	643560 102310 0 64019 0 20.904105440896 3781 0 3 7114 17548
+53	745870 102366 0 64026 0 20.904105491016 3784 0 3 7111 17533
+54	848236 102466 0 64017 0 20.904105423767 3783 0 3 7190 17772
+55	950702 102227 0 64015 0 20.9041053717 3783 0 3 7163 17691
+56	1052929 1078 51 63825 0.1 20.9 63 17 17 1071 18207
+57	1054007 1203 52 63826 0.1 20.9 71 17 17 1207 20519
+58	1055210 1104 53 63827 0.1 20.9 65 17 17 1105 18785
+59	1056314 14 54 54 0.1 0.1 1 28 28 28 784
+60	1056328 14 55 55 0.1 0.1 1 28 28 28 784
+61	1056342 14 56 56 0.1 0.1 1 28 28 28 784
+62	1056356 1168 57 63831 0.1 20.9 64 224 296 18872 5569984
+63	1057524 3579 57 63831 0.1 20.9 209 0 5200 185760 561497600
+64	1061103 1044 57 63831 0.1 20.9 64 0 1e-05 1e-05 1e-10
+65	1062147 1168 57 63831 0.1 20.9 64 224 296 18872 5569984
+66	1063315 3579 57 63831 0.1 20.9 209 0 5200 185760 561497600
+67	1066894 1301 58 63832 0.1 20.9 72 224 296 21240 6270912
+68	1068195 3604 58 63832 0.1 20.9 209 0 5200 209440 631590400
+69	1071799 1161 58 63832 0.1 20.9 72 0 1e-05 1e-05 1e-10
+70	1072960 1301 58 63832 0.1 20.9 72 224 296 21240 6270912
+71	1074261 3604 58 63832 0.1 20.9 209 0 5200 209440 631590400
+72	1077865 1196 59 63833 0.1 20.9 66 224 296 19464 5745216
+73	1079061 3585 59 63833 0.1 20.9 209 0 5200 191680 579020800
+74	1082646 1068 59 63833 0.1 20.9 66 0 1e-05 1e-05 1e-10
+75	1083714 1196 59 63833 0.1 20.9 66 224 296 19464 5745216
+76	1084910 3585 59 63833 0.1 20.9 209 0 5200 191680 579020800
+77	1088495 15254 63 63846 0.10015 20.90097 596 0 2 596 894
+78	1103749 183 81 6323 0.100638578241 1.302312729142 7 28 28 196 5488
+79	1103932 13724 82 63971 0.100638578241 20.902812862655 470 224 248 116392 28827584
+80	1117656 3974 82 63858 0.1 20.9 209 0 41680 1156480 10247628800
+81	1121630 16457 82 63867 0.100638578241 20.900980578241 468 0 0.00654324119 0.487288768096 0.0013778774590074
+82	1138087 13662 82 63867 0.100638578241 20.900980578241 468 224 248 115896 28704576
+83	1151749 3974 82 63867 0.1 20.9 209 0 41680 1156480 10247628800
+84	1155723 13374 98 63959 0.100928943082 20.902812229493 520 0 2 520 780
+85	1169097 102214 132 64014 0.101487576244 20.904104862655 3756 0 2 3756 5634
+86	1271311 22569 143 64016 0.101976085289 20.9041053717 801 49 58 44022 2426766
+87	1293880 22762 145 64018 0.101976137356 20.904105423767 808 49 58 44410 2448334
+88	1316642 22602 151 64025 0.101976166958 20.904105453369 802 49 58 44080 2430130
+89	1339244 22112 153 64027 0.101976204605 20.904105491016 784 49 58 43090 2375518
+90	1361356 22697 155 64029 0.101976209406 20.904105495817 805 49 58 44242 2438902
+91	1384053 22494 157 64031 0.101976252871 20.904105539282 798 49 58 43860 2417994
+92	1406547 13692 185 63903 0.102417228104 20.901871087286 536 0 2 536 804
+93	1420239 13071 236 63967 0.103536879964 20.902812862655 463 17 17 7871 133807
+94	1433310 13071 238 63969 0.103536879964 20.902812862655 463 11 11 5093 56023
+95	1446381 22225 289 63975 0.104345458205 20.902813172575 788 49 58 43310 2387654
+96	1468606 2000 507 64022 0.10842973818 20.904105440896 71 11 11 781 8591
+97	1470606 1745 565 62170 0.109342949583 20.203357929367 62 11 11 682 7502
+98	1472351 1791 608 63086 0.11075609179 20.506148067521 64 11 11 704 7744
+99	1474142 1103 711 63277 0.2 20.7 64 17 17 1088 18496
+100	1475245 1198 712 63551 0.2 20.8 66 17 17 1122 19074
+101	1476443 1096 714 62797 0.2 20.5 61 17 17 1037 17629
+102	1477539 33 715 4157 0.2 1.2 2 28 28 56 1568
+103	1477572 33 716 4158 0.2 1.2 2 28 28 56 1568
+104	1477605 16 718 718 0.2 0.2 1 28 28 28 784
+105	1477621 1333 719 63281 0.2 20.7 66 224 296 19392 5707776
+106	1478954 3748 719 63281 0.1 20.7 207 0 20000 190960 904428800
+107	1482702 1270 719 63281 0.2 20.7 66 0 0.016295280314 0.053573685273 0.00068369526895588
+108	1483972 1333 719 63281 0.2 20.7 66 224 296 19392 5707776
+109	1485305 3748 719 63281 0.1 20.7 207 0 20000 190960 904428800
+110	1489053 1372 720 63555 0.2 20.8 68 224 296 19984 5883008
+111	1490425 3766 720 63555 0.1 20.8 208 0 22960 196880 1040352000
+112	1494191 1324 720 63555 0.2 20.8 68 0 0.023633054123 0.104059732806 0.0020273066988254
+113	1495515 1378 720 63555 0.2 20.8 68 224 296 19984 5883008
+114	1496893 3766 720 63555 0.1 20.8 208 0 22960 196880 1040352000
+115	1500659 1185 722 62803 0.2 20.5 62 224 296 18280 5394752
+116	1501844 3712 722 62803 0.1 20.5 205 0 5200 179840 543974400
+117	1505556 1065 722 62803 0.2 20.5 62 0 1e-05 1e-05 1e-10
+118	1506621 1185 722 62803 0.2 20.5 62 224 296 18280 5394752
+119	1507806 3712 722 62803 0.1 20.5 205 0 5200 179840 543974400
+120	1511518 14458 839 63484 0.202023581209 20.703887657225 536 0 2 536 804
+121	1525976 14724 844 63758 0.202024350187 20.804267914964 548 0 2 548 822
+122	1540700 288 859 57303 0.202512005936 18.401903254868 10 49 58 541 29377
+123	1540988 433 861 62996 0.202512090254 20.503617262538 15 49 58 819 44877
+124	1541421 229 863 52567 0.202512171923 16.800710590714 8 49 58 455 25949
+125	1541650 346 866 63001 0.202512492551 20.503617329787 12 49 58 645 34785
+126	1541996 376 868 62994 0.202512530573 20.503617210471 13 49 58 703 38149
+127	1542372 374 870 63003 0.202512747694 20.503617334588 13 49 58 694 37186
+128	1542746 13420 880 62957 0.202623429308 20.502814140314 500 0 2 500 750
+129	1556166 1789 1034 62936 0.206523673756 20.502564140314 61 11 11 671 7381
+130	1557955 1319 1132 63552 0.3 20.8 73 17 17 1241 21097
+131	1559274 34 1137 6167 0.3 1.3 2 28 28 56 1568
+132	1559308 1529 1141 63556 0.3 20.8 75 224 296 22056 6496320
+133	1560837 3782 1141 63556 0.1 20.8 208 0 28880 217600 1391052800
+134	1564619 1485 1141 63556 0.3 20.8 75 0 0.015959920474 0.06520131876 0.00075253967191384
+135	1566104 1528 1141 63556 0.3 20.8 75 224 296 22056 6496320
+136	1567632 3782 1141 63556 0.1 20.8 208 0 28880 217600 1391052800
+137	1571414 16228 1207 63706 0.301291137406 20.803094609976 608 0 2 608 912
+138	1587642 377 1230 63005 0.301780059539 20.503617378053 13 49 58 697 37489
+139	1588019 346 1235 62999 0.301851512013 20.50361729214 12 52 58 654 35748
+140	1588365 1872 4685 63467 1.208275609729 20.703637657225 64 11 11 704 7744
+141	1590237 1932 4916 63747 1.211962470752 20.804017914964 66 11 11 726 7986
+142	1592169 2121 6696 63691 1.309221451322 20.802844609976 73 11 11 803 8833
+63	1594290 42 64031 64031 20.904105539282 20.904105539282 1 72097.714738173 72097.714738173 72097.714738173 5198080470.467
+66	1594332 42 64031 64031 20.904105539282 20.904105539282 1 72097.714738173 72097.714738173 72097.714738173 5198080470.467
+68	1594374 42 64031 64031 20.904105539282 20.904105539282 1 72097.714738173 72097.714738173 72097.714738173 5198080470.467
+71	1594416 42 64031 64031 20.904105539282 20.904105539282 1 72097.714738173 72097.714738173 72097.714738173 5198080470.467
+73	1594458 42 64031 64031 20.904105539282 20.904105539282 1 72097.714738173 72097.714738173 72097.714738173 5198080470.467
+76	1594500 42 64031 64031 20.904105539282 20.904105539282 1 72097.714738173 72097.714738173 72097.714738173 5198080470.467
+80	1594542 42 64031 64031 20.904105539282 20.904105539282 1 181218.58028784 181218.58028784 181218.58028784 32840173841.54
+83	1594584 41 64031 64031 20.904105539282 20.904105539282 1 60406.19342928 60406.19342928 60406.19342928 3648908204.6156
+106	1594625 68 64031 64031 20.8 20.904105539282 3 0 2960 2960 8761600
+109	1594693 68 64031 64031 20.8 20.904105539282 3 0 2960 2960 8761600
+111	1594761 50 64031 64031 20.9 20.904105539282 2 0 2960 2960 8761600
+114	1594811 50 64031 64031 20.9 20.904105539282 2 0 2960 2960 8761600
+116	1594861 104 64031 64031 20.6 20.904105539282 5 0 2960 2960 8761600
+119	1594965 104 64031 64031 20.6 20.904105539282 5 0 2960 2960 8761600
+133	1595069 50 64031 64031 20.9 20.904105539282 2 0 2960 2960 8761600
+136	1595119 50 64031 64031 20.9 20.904105539282 2 0 2960 2960 8761600
+

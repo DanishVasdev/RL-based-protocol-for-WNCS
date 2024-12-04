@@ -1,0 +1,4 @@
+<config>
+  <interface hosts="**" address="10.0.x.x" netmask="255.255.0.0"/>
+  <route hosts="**" interface="wlan0" destination="*" gateway="*"/>
+</config>
